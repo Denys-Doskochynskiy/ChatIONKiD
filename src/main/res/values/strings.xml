@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ChatIONKiD</string>
+    <string name="login" />
+    <string name="enter_username" />
+    <string name="enter_password" />
+    <string name="click_here_to_register" />
+    <string name="write_a_message" />
+    <string name="register" />
+    <string name="click_here_to_login" />
+    <string name="no_users_found" />
 </resources>
