@@ -22,9 +22,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Register extends AppCompatActivity {
-    EditText username, password;
+    EditText username, password,numberOfPhone;
+    EditText firstName,confirmPassword,surname,lastName;
     Button registerButton;
-    String user, pass;
+    String user, pass,confirm;
 
 
     @Override
@@ -32,6 +33,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        confirmPassword=(EditText)findViewById(R.id.confirmPassword);
         username = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
         registerButton = (Button)findViewById(R.id.registerButton);
@@ -45,7 +47,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 user = username.getText().toString();
                 pass = password.getText().toString();
-
+                confirm=confirmPassword.getText().toString();
                 if(user.equals("")){
                     username.setError("can't be blank");
                 }
@@ -61,6 +63,9 @@ public class Register extends AppCompatActivity {
                 else if(pass.length()<5){
                     password.setError("at least 5 characters long");
                 }
+                else if(!pass.equals(confirm)){
+                    confirmPassword.setError("password does not match");
+                }
                 else {
                     final ProgressDialog pd = new ProgressDialog(Register.this);
                     pd.setMessage("Loading...");
@@ -68,22 +73,25 @@ public class Register extends AppCompatActivity {
 
                     String url = "https://chationkid.firebaseio.com/users.json";
 
-                    StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
+                    StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String s) {
                             Firebase reference = new Firebase("https://chationkid.firebaseio.com/users");
 
-                            if(s.equals("null")) {
+                            if (s.equals("null")) {
                                 reference.child(user).child("password").setValue(pass);
+                                reference.child(pass).child("confirmPassword").setValue(confirm);
                                 Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
-                            }
-                            else {
+                                startActivity(new Intent(Register.this, Login.class));
+                            } else {
                                 try {
                                     JSONObject obj = new JSONObject(s);
 
                                     if (!obj.has(user)) {
                                         reference.child(user).child("password").setValue(pass);
+                                        reference.child(pass).child("confirmPassword").setValue(confirm);
                                         Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(Register.this, Login.class));
                                     } else {
                                         Toast.makeText(Register.this, "username already exists", Toast.LENGTH_LONG).show();
                                     }
@@ -96,10 +104,10 @@ public class Register extends AppCompatActivity {
                             pd.dismiss();
                         }
 
-                    },new Response.ErrorListener(){
+                    }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            System.out.println("" + volleyError );
+                            System.out.println("" + volleyError);
                             pd.dismiss();
                         }
                     });
@@ -107,7 +115,7 @@ public class Register extends AppCompatActivity {
                     RequestQueue rQueue = Volley.newRequestQueue(Register.this);
                     rQueue.add(request);
                 }
-                startActivity(new Intent(Register.this, Login.class));
+
             }
         });
     }
