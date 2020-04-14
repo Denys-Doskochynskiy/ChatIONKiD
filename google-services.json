@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "48614278178",
+    "firebase_url": "https://chationkid.firebaseio.com",
+    "project_id": "chationkid",
+    "storage_bucket": "chationkid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48614278178:android:107949a2f3fd138c3ef67b",
+        "android_client_info": {
+          "package_name": "com.example.chationkid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48614278178-70v2r43dgtte4d02rvns79mi09096qvf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chationkid",
+            "certificate_hash": "a71ba3c6745d84a83e222c27a8a2497f658ed9e4"
+          }
+        },
+        {
+          "client_id": "48614278178-0i3fn4gt468nrhgi1gsnjb27ggt55bvp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdWe0Zs46oeWFo4YUna4jIOEnbMvmihEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48614278178-0i3fn4gt468nrhgi1gsnjb27ggt55bvp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
